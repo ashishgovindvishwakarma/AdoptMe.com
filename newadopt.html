@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adopt Me - Find Your Forever Friend</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="newadopt.css">
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
+      <nav class="nav-menu"> 
+        <ul>
+          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="newadopt.html"><i class="fas fa-dog"></i> Adopt</a></li>
+          <li><a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a></li>
+          <li><a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Volunteer</a></li>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+          <li><a href="register.html"><i class="fas fa-user-plus"></i> Register</a></li>
+        </ul>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </div>
+  </header>
+
+  <div class="menu-overlay"></div>
+
+  <!-- Hero Section -->
+  <div class="adopt-header">
+    <h1>Find Your <span>Forever Friend</span></h1>
+    <p>Every dog deserves a loving home. Browse our rescued dogs and find your perfect companion to welcome into your family.</p>
+    
+    <div class="search-container">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search by name, breed, or location...">
+      <button class="search-btn" id="searchBtn" aria-label="Search">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Info Banner -->
+      <div class="info-banner reveal">
+        <div class="banner-content">
+          <h3>Ready to Adopt?</h3>
+          <p>All our dogs are rescued, vaccinated, and health-checked. Adoption includes initial supplies, microchipping, and ongoing support from our team.</p>
+          <button class="btn-outline" onclick="showAdoptionProcessModal()">
+            <i class="fas fa-info-circle"></i> Learn About Our Adoption Process
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <section class="filters">
+      <div class="container filter-container">
+        <div class="filter-group">
+          <label for="breedFilter">Breed:</label>
+          <select class="filter-select" id="breedFilter">
+            <option value="">All Breeds</option>
+            <option value="labrador">Labrador</option>
+            <option value="german-shepherd">German Shepherd</option>
+            <option value="beagle">Beagle</option>
+            <option value="golden-retriever">Golden Retriever</option>
+            <option value="pariah">Indian Pariah</option>
+            <option value="mixed">Mixed Breed</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="ageFilter">Age:</label>
+          <select class="filter-select" id="ageFilter">
+            <option value="">All Ages</option>
+            <option value="puppy">Puppy (0-1 yr)</option>
+            <option value="young">Young (1-3 yrs)</option>
+            <option value="adult">Adult (3-7 yrs)</option>
+            <option value="senior">Senior (7+ yrs)</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="genderFilter">Gender:</label>
+          <select class="filter-select" id="genderFilter">
+            <option value="">All Genders</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="sizeFilter">Size:</label>
+          <select class="filter-select" id="sizeFilter">
+            <option value="">All Sizes</option>
+            <option value="small">Small (0-10 kg)</option>
+            <option value="medium">Medium (10-25 kg)</option>
+            <option value="large">Large (25+ kg)</option>
+          </select>
+        </div>
+        
+        <button class="btn filter-btn" id="applyFilters">
+          <i class="fas fa-filter"></i> Apply
+        </button>
+        <button class="btn filter-btn reset" id="resetFilters">
+          <i class="fas fa-undo"></i> Reset
+        </button>
+      </div>
+    </section>
+
+    <!-- Requirements -->
+    <section class="requirements reveal">
+      <h2>Adoption Requirements</h2>
+      <div class="reqgrid">
+        <div class="req-item">
+          <div class="req-icon"><i class="fas fa-home"></i></div>
+          <div class="req-text">
+            <h3>Stable Home Environment</h3>
+            <p>You must have a stable living situation suitable for a pet with proper shelter and space.</p>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-icon"><i class="fas fa-id-card"></i></div>
+          <div class="req-text">
+            <h3>Valid ID Proof</h3>
+            <p>Government-issued ID and address verification required for adoption approval.</p>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-icon"><i class="fas fa-heart"></i></div>
+          <div class="req-text">
+            <h3>Commitment to Care</h3>
+            <p>Promise to provide lifelong care, love, and medical attention to your adopted pet.</p>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="req-text">
+            <h3>Safe Environment</h3>
+            <p>Home must be safe and secure for the pet's well-being with no hazards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dogs Section -->
+    <section class="dogs reveal" id="adopt">
+      <h2>Available Dogs</h2>
+      <div id="dog-list" class="grid"></div>
+    </section>
+
+    <!-- Recent Adoptions -->
+    <section class="adoptions reveal">
+      <h2>Happy Tails: Recent Adoptions</h2>
+      <div id="recent-adoptions" class="grid"></div>
+    </section>
+
+    <!-- Adoption Form -->
+    <div class="adopt-form-section">
+      <section class="reveal">
+        <h2>Adoption Application</h2>
+        <form id="adoptionForm" class="adopt-form">
+          <div class="form-section">
+            <h3>Personal Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="adoptorName">Full Name *</label>
+                <input type="text" id="adoptorName" required placeholder="Enter your full name">
+              </div>
+              <div class="form-group">
+                <label for="adoptorAge">Age *</label>
+                <input type="number" id="adoptorAge" min="18" max="100" required placeholder="Must be 18+">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="adoptorEmail">Email *</label>
+                <input type="email" id="adoptorEmail" required placeholder="your.email@example.com">
+              </div>
+              <div class="form-group">
+                <label for="adoptorPhone">Phone *</label>
+                <input type="tel" id="adoptorPhone" required placeholder="+91 XXXXX XXXXX">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="adoptorAddress">Full Address *</label>
+              <textarea id="adoptorAddress" required rows="3" placeholder="Enter your complete address"></textarea>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Living Situation</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="housingType">Housing Type *</label>
+                <select id="housingType" required>
+                  <option value="">Select housing type</option>
+                  <option value="house">House with yard</option>
+                  <option value="apartment">Apartment</option>
+                  <option value="condo">Condo/Townhouse</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="hasYard">Do you have a yard?</label>
+                <select id="hasYard">
+                  <option value="yes">Yes, fenced</option>
+                  <option value="unfenced">Yes, unfenced</option>
+                  <option value="no">No yard</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="familyMembers">People in Household *</label>
+                <input type="number" id="familyMembers" min="1" max="20" required placeholder="Number of people">
+              </div>
+              <div class="form-group">
+                <label for="hasChildren">Children at Home?</label>
+                <select id="hasChildren">
+                  <option value="no">No children</option>
+                  <option value="young">Yes, under 10 years</option>
+                  <option value="older">Yes, over 10 years</option>
+                  <option value="both">Yes, mixed ages</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Pet Experience</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="petExperience">Previous Pet Experience *</label>
+                <select id="petExperience" required>
+                  <option value="">Select experience level</option>
+                  <option value="first-time">First-time owner</option>
+                  <option value="some">Some experience</option>
+                  <option value="experienced">Very experienced</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="currentPets">Current Pets</label>
+                <input type="text" id="currentPets" placeholder="List type, age, gender of current pets">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="whyAdopt">Why do you want to adopt this dog? *</label>
+              <textarea id="whyAdopt" required rows="3" placeholder="Tell us about your motivation to adopt..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Dog Selection</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="dogName">Dog Name You Wish to Adopt *</label>
+                <input type="text" id="dogName" required placeholder="Enter dog's name" readonly>
+              </div>
+              <div class="form-group">
+                <label for="date">Preferred Adoption Date *</label>
+                <input type="date" id="date" required>
+              </div>
+            </div>
+          </div>
+
+          <input type="hidden" id="dogId">
+          
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit Application</button>
+            <button type="button" onclick="resetForm()" class="btn btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- Certificate Popup -->
+  <div id="certificatePopup" class="certificate-popup">
+    <div class="certificate fancy-cert">
+      <div class="cert-border">
+        <div class="cert-inner">
+          <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Paw" class="paw-top">
+          <h1>Certificate of Adoption</h1>
+          <p>This certifies that</p>
+          <h2 id="certName">[Adopter Name]</h2>
+          <p>has officially adopted</p>
+          <h2 id="certDog">[Dog Name]</h2>
+          <p>on <span id="certDate">[Adoption Date]</span></p>
+          <p class="thankyou">Thank you for giving a loving home to a rescued friend. Your kindness makes the world a better place.</p>
+
+          <div class="cert-footer">
+            <div class="signature">
+              <p>_____________________</p>
+              <p>Authorized Signature</p>
+            </div>
+            <div class="logo-cert">
+              <i class="fas fa-paw"></i>
+              <p>AdoptMe Organization</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cert-actions">
+        <button onclick="printCertificate()"><i class="fas fa-download"></i> Print / Download</button>
+        <button onclick="closeCertificate()"><i class="fas fa-times"></i> Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process Modal -->
+  <div id="processModal" class="process-modal">
+    <div class="process-content">
+      <div class="process-header">
+        <h2>Our Adoption Process</h2>
+        <button class="modal-close" onclick="closeProcessModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Browse and Choose</h3>
+            <p>Look through our available dogs and find one that matches your lifestyle and preferences.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Submit Application</h3>
+            <p>Fill out the adoption form with your details. Our team will review your application within 2-3 business days.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Home Verification</h3>
+            <p>A volunteer will schedule a brief home visit to ensure a safe environment for your new pet.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Meet and Greet</h3>
+            <p>Visit our shelter to meet your chosen dog and ensure it's a good match for your family.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h3>Complete Adoption</h3>
+            <p>Sign the adoption agreement, pay the nominal fee, and welcome your new family member home!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Login</h2>
+        <button class="modal-close" id="modalClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="loginTab">Login</button>
+          <button class="auth-tab" id="signupTab">Sign Up</button>
+        </div>
+        
+        <form class="auth-form active" id="loginForm">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email</label>
+            <input type="email" class="form-input" id="loginEmail" required placeholder="Enter your email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input type="password" class="form-input" id="loginPassword" required placeholder="Enter your password">
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="rememberMe">
+            <label for="rememberMe">Remember me</label>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+          <div class="form-help">
+            <a href="#" id="forgotPassword">Forgot password?</a>
+          </div>
+        </form>
+        
+        <form class="auth-form" id="signupForm">
+          <div class="form-group">
+            <label class="form-label" for="signupName">Full Name</label>
+            <input type="text" class="form-input" id="signupName" required placeholder="Enter your full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupEmail">Email</label>
+            <input type="email" class="form-input" id="signupEmail" required placeholder="Enter your email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupPassword">Password</label>
+            <input type="password" class="form-input" id="signupPassword" required placeholder="Create a password">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-input" id="confirmPassword" required placeholder="Confirm your password">
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="agreeTerms" required>
+            <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+        </form>
+        
+        <div class="divider">
+          <span>OR</span>
+        </div>
+        
+        <div class="social-login">
+          <button class="social-btn" type="button">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button class="social-btn" type="button">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div class="notification" id="notification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Success</div>
+      <div class="notification-message">Operation completed successfully</div>
+    </div>
+    <button class="notification-close" id="notificationClose">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
+          <p>We are a non-profit organization dedicated to rescuing, rehabilitating, and rehoming street dogs across India.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Emergency Contacts</h3>
+          <div class="contact-list">
+            <a href="tel:+1234567890" class="contact-item"><i class="fas fa-phone"></i> Animal Rescue: +1 234 567 890</a>
+            <a href="tel:+0987654321" class="contact-item"><i class="fas fa-ambulance"></i> Emergency Vet: +1 098 765 4321</a>
+            <a href="tel:911" class="contact-item"><i class="fas fa-exclamation-triangle"></i> Emergency: 911</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="adopt.html"><i class="fas fa-dog"></i> Adopt</a>
+            <a href="donate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Get Involved</h3>
+          <div class="list-item">
+            <a href="newsponsor.html"><i class="fas fa-star"></i> Sponsor a Dog</a>
+            <a href="events.html"><i class="fas fa-calendar"></i> Events</a>
+            <a href="pet-tracker.html"><i class="fas fa-map-marker-alt"></i> Pet Tracker</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 911/1/1/3 AdoptMe Org, Pet Street, Mumbai, India</p>
+          <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+          <p><i class="fas fa-envelope"></i> info@adoptme.org</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#" class="social-link"><i class="fab fa-x-twitter"></i> X (Twitter)</a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i> YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="back-to-top">
+        <button onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> Back to Top</button>
+      </div>
+
+      <div class="footer-bottom">
+        <p>2025 Adopt Me - Animal Rescue & Pet Adoption. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+<script src="newadopt.js"></script>
+</body>
+</html>

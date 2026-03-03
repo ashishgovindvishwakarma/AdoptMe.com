@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Adopt Me</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Body and background setup */
+        body {
+            background: url('login2.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for better text readability */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        /* Main login container */
+        .auth-container {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.15);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInRight 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            margin-right: 5%;
+            transform: translateX(100px);
+            opacity: 0;
+        }
+
+        /* Slide-in animation for the login card */
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Top border gradient animation */
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24, #ff6b6b);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Subtle moving grid pattern inside the card */
+        .auth-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: moveBackground 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(20px, 20px);
+            }
+        }
+
+        /* Header section with logo and title */
+        .auth-header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        /* Logo container */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        /* Logo styling - removed circle, made bigger, changed color */
+        .logo {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        /* Logo pulse animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Logo hover effect */
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Logo icon styling - changed color to match theme */
+        .logo i {
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 2;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+        }
+
+        /* Logo shine effect */
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: rotate(45deg) translateY(-100%);
+            }
+            20% {
+                transform: rotate(45deg) translateY(100%);
+            }
+            100% {
+                transform: rotate(45deg) translateY(100%);
+            }
+        }
+
+        /* Brand name styling */
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tagline styling */
+        .auth-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+            animation: slideInLeft 0.8s ease-out both;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Staggered animation for form elements */
+        .form-group:nth-child(1) {
+            animation-delay: 0.7s;
+        }
+
+        .form-group:nth-child(2) {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Form label styling */
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Required field indicator */
+        .form-group label .required {
+            color: #ff6b6b;
+            margin-left: 3px;
+        }
+
+        /* Input wrapper for icon positioning */
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Input icon styling */
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            pointer-events: none;
+            transition: color 0.3s;
+        }
+
+        /* Form input styling */
+        .form-control {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Placeholder text styling */
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Input hover effect */
+        .form-control:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Input focus effect */
+        .form-control:focus {
+            border-color: #ff6b6b;
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
+        }
+
+        /* Icon color change on input focus */
+        .form-control:focus + .input-icon {
+            color: #ff6b6b;
+        }
+
+        /* Error state styling */
+        .form-control.error {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.2);
+            animation: shake 0.5s;
+        }
+
+        /* Shake animation for error state */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* Success state styling */
+        .form-control.success {
+            border-color: #2ecc71;
+            background: rgba(46, 204, 113, 0.2);
+        }
+
+        /* Validation icon styling */
+        .input-validation {
+            position: absolute;
+            right: 45px;
+            color: white;
+            font-size: 1rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Show validation icon with animation */
+        .input-validation.show {
+            opacity: 1;
+            animation: bounceIn 0.5s;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Error validation icon */
+        .input-validation.error {
+            color: #e74c3c;
+        }
+
+        /* Success validation icon */
+        .input-validation.success {
+            color: #2ecc71;
+        }
+
+        /* Input feedback message styling */
+        .input-feedback {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Show feedback message with animation */
+        .input-feedback.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Error feedback message */
+        .input-feedback.error {
+            color: #e74c3c;
+        }
+
+        /* Success feedback message */
+        .input-feedback.success {
+            color: #2ecc71;
+        }
+
+        /* Character count styling */
+        .character-count {
+            position: absolute;
+            right: 15px;
+            bottom: -20px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Password visibility toggle button */
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 5px;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        /* Toggle button hover effect */
+        .toggle-password:hover {
+            color: #ff6b6b;
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Form options section (remember me and forgot password) */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 10px;
+            animation: fadeIn 1s ease-out 1.1s both;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Remember me checkbox styling */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* Checkbox styling */
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #ff6b6b;
+            transition: transform 0.2s;
+        }
+
+        /* Checkbox hover effect */
+        .remember-me input[type="checkbox"]:hover {
+            transform: scale(1.1);
+        }
+
+        /* Remember me label styling */
+        .remember-me label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            margin: 0;
+            transition: color 0.3s;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Label hover effect */
+        .remember-me:hover label {
+            color: #ff6b6b;
+        }
+
+        /* Forgot password link styling */
+        .forgot-password {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Forgot password link underline animation */
+        .forgot-password::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        /* Underline animation on hover */
+        .forgot-password:hover::after {
+            width: 100%;
+        }
+
+        /* Submit button styling */
+        .btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(238, 90, 36, 0.8));
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 1.3s both;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Button shine effect */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        /* Shine effect animation on hover */
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Button hover effect */
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(238, 90, 36, 0.9));
+        }
+
+        /* Button active effect */
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Disabled button state */
+        .btn:disabled {
+            background: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Footer section styling */
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out 1.5s both;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Footer link styling */
+        .auth-footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        /* Footer link hover effect */
+        .auth-footer a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Footer link underline animation */
+        .auth-footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        /* Underline animation on hover */
+        .auth-footer a:hover::after {
+            width: 100%;
+        }
+
+        /* Notification popup styling */
+        .notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 300px;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 10000;
+            transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* Show notification animation */
+        .notification.show {
+            top: 30px;
+        }
+
+        /* Notification icon styling */
+        .notification-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Pulse animation for notification icon */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Success notification icon */
+        .notification.success .notification-icon {
+            color: #2ecc71;
+        }
+
+        /* Error notification icon */
+        .notification.error .notification-icon {
+            color: #e74c3c;
+        }
+
+        /* Notification content styling */
+        .notification-content {
+            flex: 1;
+        }
+
+        /* Notification title styling */
+        .notification-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        /* Notification message styling */
+        .notification-message {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Password strength meter styling */
+        .password-strength {
+            margin-top: 8px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            display: none;
+        }
+
+        /* Show password strength meter with animation */
+        .password-strength.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 20px;
+            }
+        }
+
+        /* Password strength meter fill */
+        .password-strength-meter {
+            height: 100%;
+            width: 0;
+            border-radius: 3px;
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        /* Weak password indicator */
+        .password-strength-meter.weak {
+            width: 33%;
+            background-color: #e74c3c;
+        }
+
+        /* Medium password indicator */
+        .password-strength-meter.medium {
+            width: 66%;
+            background-color: #f39c12;
+        }
+
+        /* Strong password indicator */
+        .password-strength-meter.strong {
+            width: 100%;
+            background-color: #2ecc71;
+        }
+
+        /* Password requirements section styling */
+        .password-requirements {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            display: none;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Show password requirements with animation */
+        .password-requirements.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        /* Individual requirement styling */
+        .requirement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+            transition: color 0.3s;
+        }
+
+        /* Requirement icon styling */
+        .requirement i {
+            margin-right: 5px;
+            font-size: 0.7rem;
+        }
+
+        /* Valid requirement styling */
+        .requirement.valid {
+            color: #2ecc71;
+        }
+
+        /* Invalid requirement styling */
+        .requirement.invalid {
+            color: #e74c3c;
+        }
+
+        /* Responsive design for mobile devices */
+        @media (max-width: 768px) {
+            body {
+                justify-content: center;
+            }
+            
+            .auth-container {
+                margin-right: 0;
+            }
+            
+            .brand-name {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Smooth scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Social login buttons */
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn.google:hover {
+            background: #db4437;
+        }
+
+        .social-btn.facebook:hover {
+            background: #3b5998;
+        }
+
+        .social-btn.twitter:hover {
+            background: #1da1f2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main login container -->
+    <div class="auth-container">
+        <!-- Header section with logo and title -->
+        <div class="auth-header">
+            <div class="logo-container">
+                <!-- Logo without circle background -->
+                <div class="logo">
+                    <i class="fas fa-paw"></i>
+                </div>
+            </div>
+            <h1 class="brand-name">ADOPT ME</h1>
+            <p>Sign in to continue your rescue mission</p>
+        </div>
+
+        <!-- Login form -->
+        <form id="loginForm">
+            <!-- Email input field -->
+            <div class="form-group fade-in">
+                <label for="email">Email Address<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="your.email@example.com"
+                        autocomplete="email"
+                        maxlength="100"
+                        required
+                    >
+                    <i class="fas fa-envelope input-icon"></i>
+                    <i class="fas input-validation"></i>
+                    <div class="character-count">0/100</div>
+                </div>
+                <div class="input-feedback"></div>
+            </div>
+
+            <!-- Password input field -->
+            <div class="form-group fade-in">
+                <label for="password">Password<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        maxlength="18"
+                        required
+                    >
+                    <i class="fas fa-lock input-icon"></i>
+                    <!-- Password visibility toggle button -->
+                    <button type="button" class="toggle-password" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <i class="fas input-validation"></i>
+                </div>
+                <!-- Password strength meter -->
+                <div class="password-strength" id="passwordStrength">
+                    <div class="password-strength-meter"></div>
+                </div>
+                <!-- Password requirements checklist -->
+                <div class="password-requirements" id="passwordRequirements">
+                    <div class="requirement" id="length">
+                        <i class="fas fa-circle"></i> 8-18 characters
+                    </div>
+                    <div class="requirement" id="uppercase">
+                        <i class="fas fa-circle"></i> At least 1 uppercase letter
+                    </div>
+                    <div class="requirement" id="lowercase">
+                        <i class="fas fa-circle"></i> At least 1 lowercase letter
+                    </div>
+                    <div class="requirement" id="number">
+                        <i class="fas fa-circle"></i> At least 1 number
+                    </div>
+                </div>
+                <div class="input-feedback"></div>
+            </div>
+
+            <!-- Remember me and forgot password options -->
+            <div class="form-options fade-in">
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <!-- Link to forgot password page -->
+                <a href="forgotpassword.html" class="forgot-password">Forgot password?</a>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn fade-in" id="submitBtn">
+                <i class="fas fa-sign-in-alt"></i> Login </button>
+        </form>
+
+        <!-- Social login options -->
+        <div class="social-login fade-in">
+            <p>Or sign in with</p>
+            <div class="social-buttons">
+                <button class="social-btn google" title="Sign in with Google">
+                    <i class="fab fa-google"></i>
+                </button>
+                <button class="social-btn facebook" title="Sign in with Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <button class="social-btn twitter" title="Sign in with Twitter">
+                    <i class="fab fa-twitter"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer with signup link -->
+        <div class="auth-footer fade-in">
+            Don't have an account? <a href="register.html">Sign up here</a>
+        </div>
+    </div>
+
+    <script>
+        // User key for localStorage
+        const USER_KEY = 'user';
+        const REMEMBER_EMAIL_KEY = 'rememberedEmail';
+
+        // DOM Elements
+        const form = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const submitBtn = document.getElementById('submitBtn');
+        const rememberMeCheckbox = document.getElementById('rememberMe');
+        const emailValidation = emailInput.nextElementSibling.nextElementSibling;
+        const passwordValidation = passwordInput.nextElementSibling.nextElementSibling;
+        const emailFeedback = emailInput.parentElement.nextElementSibling;
+        const passwordFeedback = passwordInput.parentElement.nextElementSibling.nextElementSibling;
+        const characterCount = emailInput.parentElement.querySelector('.character-count');
+        const passwordStrength = document.getElementById('passwordStrength');
+        const passwordStrengthMeter = passwordStrength.querySelector('.password-strength-meter');
+        const passwordRequirements = document.getElementById('passwordRequirements');
+
+        // Check if there's a remembered email in localStorage
+        const rememberedEmail = localStorage.getItem(REMEMBER_EMAIL_KEY);
+        if (rememberedEmail) {
+            emailInput.value = rememberedEmail;
+            rememberMeCheckbox.checked = true;
+            validateEmail();
+        }
+
+        // Initialize smooth scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        /**
+         * Validate email input with strict email format validation
+         * @returns {boolean} True if email is valid, false otherwise
+         */
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            // More strict email regex that requires proper domain format
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            
+            // Update character count
+            characterCount.textContent = `${email.length}/100`;
+            
+            // Check if email is empty
+            if (email.length === 0) {
+                emailInput.classList.remove('error', 'success');
+                emailValidation.classList.remove('show', 'error', 'success');
+                emailFeedback.classList.remove('show', 'error', 'success');
+                return false;
+            }
+            
+            // Check if email exceeds maximum length
+            if (email.length > 100) {
+                emailInput.classList.add('error');
+                emailInput.classList.remove('success');
+                emailValidation.classList.add('show', 'error');
+                emailValidation.classList.remove('success');
+                emailValidation.className = 'fas fa-times-circle input-validation show error';
+                emailFeedback.classList.add('show', 'error');
+                emailFeedback.classList.remove('success');
+                emailFeedback.textContent = 'Email must be less than 100 characters';
+                return false;
+            }
+            
+            // Check if email format is valid
+            if (!emailRegex.test(email)) {
+                emailInput.classList.add('error');
+                emailInput.classList.remove('success');
+                emailValidation.classList.add('show', 'error');
+                emailValidation.classList.remove('success');
+                emailValidation.className = 'fas fa-times-circle input-validation show error';
+                emailFeedback.classList.add('show', 'error');
+                emailFeedback.classList.remove('success');
+                emailFeedback.textContent = 'Please enter a valid email address (e.g., name@example.com)';
+                return false;
+            }
+            
+            // Email is valid
+            emailInput.classList.add('success');
+            emailInput.classList.remove('error');
+            emailValidation.classList.add('show', 'success');
+            emailValidation.classList.remove('error');
+            emailValidation.className = 'fas fa-check-circle input-validation show success';
+            emailFeedback.classList.add('show', 'success');
+            emailFeedback.classList.remove('error');
+            emailFeedback.textContent = 'Valid email address';
+            return true;
+        }
+
+        /**
+         * Validate password input
+         * @returns {boolean} True if password is valid, false otherwise
+         */
+        function validatePassword() {
+            const password = passwordInput.value;
+            
+            // Check if password is empty
+            if (password.length === 0) {
+                passwordInput.classList.remove('error', 'success');
+                passwordValidation.classList.remove('show', 'error', 'success');
+                passwordFeedback.classList.remove('show', 'error', 'success');
+                passwordStrength.classList.remove('show');
+                passwordRequirements.classList.remove('show');
+                return false;
+            }
+            
+            // Show password requirements and strength meter
+            passwordStrength.classList.add('show');
+            passwordRequirements.classList.add('show');
+            
+            // Check password requirements
+            const lengthValid = password.length >= 8 && password.length <= 18;
+            const uppercaseValid = /[A-Z]/.test(password);
+            const lowercaseValid = /[a-z]/.test(password);
+            const numberValid = /[0-9]/.test(password);
+            
+            // Update requirement indicators
+            updateRequirement('length', lengthValid);
+            updateRequirement('uppercase', uppercaseValid);
+            updateRequirement('lowercase', lowercaseValid);
+            updateRequirement('number', numberValid);
+            
+            // Calculate password strength
+            const validCount = [lengthValid, uppercaseValid, lowercaseValid, numberValid].filter(Boolean).length;
+            
+            // Password is too weak
+            if (validCount < 2) {
+                passwordStrengthMeter.className = 'password-strength-meter weak';
+                passwordInput.classList.add('error');
+                passwordInput.classList.remove('success');
+                passwordValidation.classList.add('show', 'error');
+                passwordValidation.classList.remove('success');
+                passwordValidation.className = 'fas fa-times-circle input-validation show error';
+                passwordFeedback.classList.add('show', 'error');
+                passwordFeedback.classList.remove('success');
+                passwordFeedback.textContent = 'Password is too weak. Please meet at least 2 requirements.';
+                return false;
+            } 
+            // Password is medium strength
+            else if (validCount < 4) {
+                passwordStrengthMeter.className = 'password-strength-meter medium';
+                passwordInput.classList.remove('error', 'success');
+                passwordValidation.classList.remove('show', 'error', 'success');
+                passwordFeedback.classList.remove('show', 'error', 'success');
+                return true;
+            } 
+            // Password is strong
+            else {
+                passwordStrengthMeter.className = 'password-strength-meter strong';
+                passwordInput.classList.add('success');
+                passwordInput.classList.remove('error');
+                passwordValidation.classList.add('show', 'success');
+                passwordValidation.classList.remove('error');
+                passwordValidation.className = 'fas fa-check-circle input-validation show success';
+                passwordFeedback.classList.add('show', 'success');
+                passwordFeedback.classList.remove('error');
+                passwordFeedback.textContent = 'Strong password';
+                return true;
+            }
+        }
+
+        /**
+         * Update password requirement indicator
+         * @param {string} id - The ID of the requirement element
+         * @param {boolean} isValid - Whether the requirement is met
+         */
+        function updateRequirement(id, isValid) {
+            const requirement = document.getElementById(id);
+            const icon = requirement.querySelector('i');
+            
+            if (isValid) {
+                requirement.classList.add('valid');
+                requirement.classList.remove('invalid');
+                icon.className = 'fas fa-check-circle';
+            } else {
+                requirement.classList.add('invalid');
+                requirement.classList.remove('valid');
+                icon.className = 'fas fa-circle';
+            }
+        }
+
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+
+        /**
+         * Show notification popup
+         * @param {string} type - The type of notification (success or error)
+         * @param {string} title - The title of the notification
+         * @param {string} message - The message content of the notification
+         * @param {number} duration - How long the notification should be shown (in milliseconds)
+         */
+        function showNotification(type, title, message, duration = 3000) {
+            // Remove existing notification if any
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+
+            // Set notification icon based on type
+            let icon = '';
+            if (type === 'success') {
+                icon = '<i class="fas fa-check-circle notification-icon"></i>';
+            } else if (type === 'error') {
+                icon = '<i class="fas fa-times-circle notification-icon"></i>';
+            }
+
+            // Set notification content
+            notification.innerHTML = `
+                ${icon}
+                <div class="notification-content">
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-message">${message}</div>
+                </div>
+            `;
+
+            // Add notification to DOM
+            document.body.appendChild(notification);
+
+            // Show notification with animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            // Hide notification after specified duration
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, duration);
+        }
+
+        // Add event listeners for real-time validation
+        emailInput.addEventListener('input', validateEmail);
+        emailInput.addEventListener('blur', validateEmail);
+        passwordInput.addEventListener('input', validatePassword);
+        passwordInput.addEventListener('blur', validatePassword);
+
+        // Handle social login buttons
+        document.querySelectorAll('.social-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const platform = this.classList.contains('google') ? 'Google' : 
+                                this.classList.contains('facebook') ? 'Facebook' : 'Twitter';
+                
+                showNotification('success', 'Social Login', `Redirecting to ${platform} login...`, 2000);
+                
+                // Simulate redirect to social login
+                setTimeout(() => {
+                    // In a real app, this would redirect to the OAuth provider
+                    showNotification('success', 'Login Successful', `Welcome back! Redirecting to homepage...`, 2000);
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 2000);
+                }, 2000);
+            });
+        });
+        //Form submission handler
+form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Validate email
+    if (!validateEmail()) {
+        showNotification('error', 'Login Failed', 'Please enter a valid email');
+        return;
+    }
+
+    // Basic password check for login (NOT strength-based)
+    if (passwordInput.value.trim().length === 0) {
+        showNotification('error', 'Login Failed', 'Password cannot be empty');
+        return;
+    }
+
+    // Remember Me
+    if (rememberMeCheckbox.checked) {
+        localStorage.setItem(REMEMBER_EMAIL_KEY, emailInput.value);
+    } else {
+        localStorage.removeItem(REMEMBER_EMAIL_KEY);
+    }
+
+    // Loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span> Logging In...';
+
+    // Fake API delay
+    await new Promise(resolve => setTimeout(resolve, 1200));
+
+    // Save login state
+    const user = {
+        name: emailInput.value.split('@')[0],
+        email: emailInput.value,
+        loggedIn: true
+    };
+
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+
+    showNotification(
+        'success',
+        'Login Successful',
+        'Redirecting to homepage...',
+        1500
+    );
+
+    // ✅ FINAL & GUARANTEED REDIRECT
+    setTimeout(() => {
+        window.location.replace('home.html');
+    }, 1500);
+});
+    </script>
+</body>
+</html>

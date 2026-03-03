@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volunteer - AdoptMe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* BRAND COLORS */
+      --primary-color: #f59e0b;
+      --secondary-color: #fef3c7;
+      --accent-color: #ea580c;
+      --accent-light: #fde68a;
+
+      /* TEXT */
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --text-color: #374151;
+
+      /* BACKGROUND */
+      --bg-light: #fffaf3;
+      --bg-white: #ffffff;
+      --card-background: #ffffff;
+
+      /* UI SUPPORT */
+      --success: #16a34a;
+      --danger: #dc2626;
+      --warning-color: #f59e0b;
+      --success-color: #16a34a;
+
+      /* SHADOWS */
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+
+      /* BORDERS */
+      --border-color: #e5e7eb;
+      --border-radius: 0.75rem;
+      --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+      --transition: all 0.3s ease;
+      --light-color: #f3f4f6;
+      --dark-color: #1f2937;
+    }
+
+    body.dark {
+      --primary-color: #fbbf24;
+      --secondary-color: #3b2f1d;
+      --accent-color: #fb923c;
+      --accent-light: #fde68a;
+
+      --text-dark: #f9fafb;
+      --text-light: #d1d5db;
+      --text-color: #e5e7eb;
+
+      --bg-light: #1a140b;
+      --bg-white: #2a2116;
+      --card-background: #2d251a;
+
+      --border-color: #4a4235;
+
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.7);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background: var(--bg-light);
+      transition: background-color 0.4s ease, color 0.4s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--bg-white);
+      color: var(--text-dark);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+
+    .dark header {
+      background: linear-gradient(135deg, #3e3426, #2c2416);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      color: var(--primary-color);
+      text-shadow: 0 2px 4px rgba(220, 189, 33, 0.3);
+      transition: var(--transition);
+    }
+
+    .logo:hover { transform: scale(1.05); }
+    .logo i { margin-right: 10px; font-size: 2rem; }
+
+    /* NAVIGATION */
+    nav.nav-menu ul {
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+
+    nav.nav-menu ul li {
+      margin-left: 25px;
+      position: relative;
+    }
+
+    nav.nav-menu ul li a {
+      color: var(--accent-color);
+      padding: 10px 15px;
+      border-radius: 30px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav.nav-menu ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 0; height: 100%;
+      background: rgba(151, 138, 4, 0.15);
+      transition: width 0.3s ease;
+      z-index: -1;
+      border-radius: 30px;
+    }
+    nav.nav-menu ul li a:hover::before { width: 100%; }
+    nav.nav-menu ul li a i { margin-right: 8px; font-size: 1.1rem; }
+    nav.nav-menu ul li a:hover { transform: translateY(-2px); }
+
+    /* Theme Toggle & Hamburger */
+    .theme-toggle {
+      background: rgba(242, 146, 43, 0.2);
+      border: 1px solid rgba(247, 182, 50, 0.3);
+      color: var(--primary-color);
+      border-radius: 50%;
+      width: 42px; height: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: var(--transition);
+    }
+    .theme-toggle:hover {
+      transform: rotate(15deg) scale(1.1);
+      background: rgba(247, 171, 31, 0.3);
+      box-shadow: 0 0 15px rgba(234, 147, 18, 0.3);
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      cursor: pointer;
+      margin-left: 15px;
+    }
+
+    @media (max-width: 768px) {
+      nav.nav-menu {
+        position: fixed;
+        top: 0; left: -100%;
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(145deg, var(--primary-color), var(--accent-color));
+        padding: 70px 25px 20px;
+        box-shadow: 3px 0 15px rgba(0, 0, 0, 0.2);
+        transition: left 0.4s ease;
+        overflow-y: auto;
+        display: block;
+        z-index: 1001;
+      }
+      nav.nav-menu.active { left: 0; }
+      nav.nav-menu ul { flex-direction: column; gap: 12px; padding: 0; }
+      nav.nav-menu ul li { width: 100%; margin-left: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+      nav.nav-menu ul li a {
+        display: block; width: 100%;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 12px 18px;
+        border-radius: 10px;
+        color: #fff;
+      }
+      .hamburger { display: block; }
+      .dark nav.nav-menu { background: linear-gradient(145deg, #3e3426, #2c2416); }
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 998;
+    }
+    .menu-overlay.active { display: block; }
+
+    /* HERO SECTION */
+    .volunteer-header {
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .volunteer-header::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(234, 88, 12, 0.06) 0%, transparent 50%);
+      animation: floatBg 20s ease-in-out infinite;
+    }
+
+    @keyframes floatBg {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(20px, -20px) rotate(1deg); }
+      66% { transform: translate(-20px, 20px) rotate(-1deg); }
+    }
+
+    .volunteer-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .volunteer-header h1 span {
+      color: var(--primary-color);
+      position: relative;
+    }
+
+    .volunteer-header h1 span::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+      transform: scaleX(0);
+      animation: expandLine 0.6s ease forwards 0.8s;
+    }
+
+    @keyframes expandLine { to { transform: scaleX(1); } }
+
+    .volunteer-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-light);
+      font-size: 1.15rem;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards 0.2s;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards 0.4s;
+    }
+
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: block;
+    }
+    .stat-label { font-size: 0.9rem; color: var(--text-light); }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--card-background);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    section h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+
+    /* Opportunity Cards */
+    .opportunities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .opp-card {
+      background: var(--bg-light);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .opp-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .opp-icon-header {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .opp-icon-header i {
+      font-size: 3rem;
+      color: white;
+      z-index: 2;
+    }
+
+    .opp-icon-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      z-index: 1;
+    }
+
+    .opp-card-content { padding: 1.5rem; }
+
+    .opp-card h3 {
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+    }
+
+    .opp-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      min-height: 72px;
+    }
+
+    .opp-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-color);
+    }
+
+    .opp-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .opp-meta i { color: var(--primary-color); }
+
+    /* Requirements Section */
+    .requirements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .req-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .req-icon {
+      width: 50px; height: 50px;
+      background: var(--bg-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--primary-color);
+      flex-shrink: 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .req-text h3 {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+    .req-text p { font-size: 0.9rem; color: var(--text-light); }
+
+    /* Application Form */
+    .app-form-section {
+      background: var(--bg-light);
+      padding: 3rem 0;
+    }
+    .app-form-section section { background: var(--card-background); }
+
+    .volunteer-form {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .form-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-top: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group { margin-bottom: 0; }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      font-family: inherit;
+      font-size: 1rem;
+      background: var(--bg-white);
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .checkbox-item input {
+      width: 18px; height: 18px;
+      accent-color: var(--primary-color);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+    }
+    .btn-secondary {
+      background: var(--bg-light);
+      color: var(--text-dark);
+      border: 2px solid var(--border-color);
+    }
+    .btn-secondary:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* Perks Section */
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .perk-item {
+      padding: 1.5rem;
+      background: var(--bg-light);
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+
+    .perk-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .perk-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .perk-item h3 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .perk-item p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-light);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      font-size: 4rem;
+      font-family: serif;
+      color: var(--primary-color);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    .testimonial-content {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .author-info h4 {
+      color: var(--text-dark);
+      margin-bottom: 0;
+    }
+    .author-info span {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* FAQ */
+    .faq-list { max-width: 800px; margin: 0 auto; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    .faq-question i {
+      transition: transform 0.3s ease;
+      color: var(--primary-color);
+    }
+
+    .faq-question.active i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: var(--text-light);
+    }
+
+    .faq-answer p { padding-top: 1rem; }
+    .faq-answer.active { max-height: 200px; }
+
+    /* FOOTER */
+    .footer {
+      background-color: var(--text-dark);
+      color: var(--secondary-color);
+      padding: 60px 0 20px;
+      margin-top: auto;
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    }
+
+    .dark .footer {
+      background-color: #1a1612;
+      color: var(--accent-light);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--bg-white);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 40px; height: 3px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: var(--secondary-color);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      transition: var(--transition);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-section a:hover {
+      color: var(--accent-light);
+      transform: translateX(5px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      text-align: center;
+      color: var(--secondary-color);
+      font-size: 0.9rem;
+    }
+
+    .back-to-top {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .back-to-top button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-to-top button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px; right: 20px;
+      background-color: var(--bg-white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transform: translateX(400px);
+      transition: transform 0.4s ease;
+      z-index: 3000;
+      max-width: 380px;
+      border-left: 4px solid var(--success-color);
+    }
+
+    .notification.show { transform: translateX(0); }
+    .notification.error { border-left-color: var(--danger); }
+    
+    .notification-icon { font-size: 1.5rem; }
+    .notification.success .notification-icon { color: var(--success-color); }
+    .notification.error .notification-icon { color: var(--danger); }
+    
+    .notification-content { flex: 1; }
+    .notification-title { font-weight: 600; margin-bottom: 0.25rem; color: var(--text-dark); }
+    .notification-message { font-size: 0.875rem; color: var(--text-light); }
+    
+    .notification-close {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stats-banner { gap: 1.5rem; }
+      .stat-number { font-size: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-content { text-align: center; }
+      .footer-section { align-items: center; }
+      .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .volunteer-header h1 { font-size: 2rem; }
+      section { padding: 1.5rem; margin: 1rem; }
+      .form-actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
+      <nav class="nav-menu"> 
+        <ul>
+          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="newadopt.html"><i class="fas fa-dog"></i> Adopt</a></li>
+          <li><a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a></li>
+          <li><a href="newvolunteer.html"><i class="fas fa-users"></i> Volunteer</a></li>
+          <li><a href="newsponsor.html"><i class="fas fa-handshake"></i> Sponsor</a></li>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger"><i class="fas fa-bars"></i></div> 
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="volunteer-header">
+    <h1>Join Our <span>Mission</span></h1>
+    <p>Devote your time and skills to help street dogs find safety, care, and loving homes. Every pair of hands makes a difference.</p>
+    
+    <div class="stats-banner">
+      <div class="stat-item">
+        <span class="stat-number" data-target="350">0</span>
+        <span class="stat-label">Active Volunteers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="15000">0</span>
+        <span class="stat-label">Hours Donated</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="45">0</span>
+        <span class="stat-label">Events Yearly</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-overlay"></div>
+
+  <main>
+    <!-- Opportunities Section -->
+    <section class="reveal">
+      <h2>Volunteer Opportunities</h2>
+      <div class="opportunities-grid">
+        <div class="opp-card">
+          <div class="opp-icon-header">
+            <i class="fas fa-hands-helping"></i>
+          </div>
+          <div class="opp-card-content">
+            <h3>Animal Care</h3>
+            <p>Help with feeding, grooming, and socializing dogs at our shelter. Direct interaction with our rescues.</p>
+            <div class="opp-meta">
+              <span><i class="fas fa-clock"></i> 2-4 hrs/week</span>
+              <span><i class="fas fa-map-marker-alt"></i> Shelter</span>
+            </div>
+            <button class="btn btn-secondary" onclick="selectOpportunity('Animal Care')">Select</button>
+          </div>
+        </div>
+
+        <div class="opp-card">
+          <div class="opp-icon-header">
+            <i class="fas fa-first-aid"></i>
+          </div>
+          <div class="opp-card-content">
+            <h3>Medical Assistance</h3>
+            <p>Assist vets during check-ups, administer medications, and help with rescue operations. Medical background preferred.</p>
+            <div class="opp-meta">
+              <span><i class="fas fa-clock"></i> Flexible</span>
+              <span><i class="fas fa-map-marker-alt"></i> Clinic/Shelter</span>
+            </div>
+            <button class="btn btn-secondary" onclick="selectOpportunity('Medical Assistance')">Select</button>
+          </div>
+        </div>
+
+        <div class="opp-card">
+          <div class="opp-icon-header">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <div class="opp-card-content">
+            <h3>Outreach & Events</h3>
+            <p>Represent AdoptMe at adoption drives, awareness camps, and fundraising events. Great for extroverts!</p>
+            <div class="opp-meta">
+              <span><i class="fas fa-clock"></i> Weekends</span>
+              <span><i class="fas fa-map-marker-alt"></i> Various</span>
+            </div>
+            <button class="btn btn-secondary" onclick="selectOpportunity('Outreach & Events')">Select</button>
+          </div>
+        </div>
+
+        <div class="opp-card">
+          <div class="opp-icon-header">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="opp-card-content">
+            <h3>Remote Support</h3>
+            <p>Social media management, content writing, graphic design, or web development from the comfort of your home.</p>
+            <div class="opp-meta">
+              <span><i class="fas fa-clock"></i> Flexible</span>
+              <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+            </div>
+            <button class="btn btn-secondary" onclick="selectOpportunity('Remote Support')">Select</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="reveal">
+      <h2>Requirements</h2>
+      <div class="requirements-grid">
+        <div class="req-item">
+          <div class="req-icon"><i class="fas fa-user-check"></i></div>
+          <div class="req-text">
+            <h3>Age Requirement</h3>
+            <p>Must be 18 years or older. Under 18 requires parental consent.</p>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-icon"><i class="fas fa-heart"></i></div>
+          <div class="req-text">
+            <h3>Passion for Animals</h3>
+            <p>Genuine love and empathy for animals is essential.</p>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-icon"><i class="fas fa-calendar-check"></i></div>
+          <div class="req-text">
+            <h3>Commitment</h3>
+            <p>Minimum 4 hours per month for at least 3 months.</p>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="req-text">
+            <h3>Training</h3>
+            <p>Complete our mandatory orientation and training session.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Application Form -->
+    <div class="app-form-section">
+      <section class="reveal">
+        <h2>Volunteer Application</h2>
+        <form id="volunteerForm" class="volunteer-form">
+          <div>
+            <h3 class="form-section-title">Personal Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" placeholder="Your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" placeholder="your.email@example.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" required>
+              </div>
+              <div class="form-group">
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <textarea id="address" rows="2" placeholder="Your current address"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="occupation">Occupation</label>
+                <input type="text" id="occupation" placeholder="e.g., Student, Professional">
+              </div>
+              <div class="form-group">
+                <label for="hearAbout">How did you hear about us?</label>
+                <select id="hearAbout">
+                  <option value="">Select an option</option>
+                  <option value="social">Social Media</option>
+                  <option value="friend">Friend/Family</option>
+                  <option value="event">Event/Drive</option>
+                  <option value="search">Google Search</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="form-section-title">Preferences & Skills</h3>
+            <div class="form-group">
+              <label>Areas of Interest (Select all that apply)</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="animal-care"> Animal Care
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="medical"> Medical Assistance
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="outreach"> Outreach & Events
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="admin"> Admin Support
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="remote"> Remote Support
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="transport"> Transport/Rescue
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="skills">Relevant Skills or Experience</label>
+              <textarea id="skills" rows="3" placeholder="e.g., Veterinary experience, Photography, Social Media Marketing..."></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="availability">Availability *</label>
+                <select id="availability" required>
+                  <option value="">Select availability</option>
+                  <option value="weekdays">Weekdays</option>
+                  <option value="weekends">Weekends</option>
+                  <option value="both">Both</option>
+                  <option value="flexible">Flexible</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="hours">Hours per Week *</label>
+                <select id="hours" required>
+                  <option value="">Select hours</option>
+                  <option value="1-2">1-2 hours</option>
+                  <option value="3-5">3-5 hours</option>
+                  <option value="5-10">5-10 hours</option>
+                  <option value="10+">10+ hours</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="form-section-title">Emergency Contact</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="emergencyName">Contact Name *</label>
+                <input type="text" id="emergencyName" placeholder="Emergency contact name" required>
+              </div>
+              <div class="form-group">
+                <label for="emergencyRelation">Relationship *</label>
+                <input type="text" id="emergencyRelation" placeholder="e.g., Parent, Spouse" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="emergencyPhone">Emergency Phone *</label>
+              <input type="tel" id="emergencyPhone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="motivation">Why do you want to volunteer with us?</label>
+            <textarea id="motivation" rows="3" placeholder="Tell us what motivates you to help..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i> Submit Application
+            </button>
+            <button type="reset" class="btn btn-secondary">
+              <i class="fas fa-redo"></i> Reset Form
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <!-- Perks Section -->
+    <section class="reveal">
+      <h2>Why Volunteer With Us?</h2>
+      <div class="perks-grid">
+        <div class="perk-item">
+          <div class="perk-icon"><i class="fas fa-certificate"></i></div>
+          <h3>Certification</h3>
+          <p>Receive official volunteer certificates and work experience letters.</p>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon"><i class="fas fa-users"></i></div>
+          <h3>Community</h3>
+          <p>Join a passionate community of animal lovers and activists.</p>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon"><i class="fas fa-tshirt"></i></div>
+          <h3>Merchandise</h3>
+          <p>Get exclusive AdoptMe t-shirts and volunteer kits.</p>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon"><i class="fas fa-glass-cheers"></i></div>
+          <h3>Events</h3>
+          <p>Annual volunteer appreciation dinners and recognition events.</p>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon"><i class="fas fa-book-reader"></i></div>
+          <h3>Training</h3>
+          <p>Access to animal care workshops and skill development sessions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="reveal">
+      <h2>Volunteer Stories</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "Volunteering at AdoptMe changed my perspective on life. Spending weekends with these dogs has been therapeutic. I've made lifelong friends and found my purpose."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">AS</div>
+            <div class="author-info">
+              <h4>Ankita Sharma</h4>
+              <span>Volunteer since 2022</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "As a vet student, this experience has been invaluable. I get hands-on experience while helping dogs in need. The team is supportive and the work is rewarding."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">RP</div>
+            <div class="author-info">
+              <h4>Rahul Patel</h4>
+              <span>Medical Volunteer</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "I work full-time but I help remotely with social media. It's flexible and I still feel connected to the cause. Every post I create helps a dog get adopted."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">SM</div>
+            <div class="author-info">
+              <h4>Sneha Menon</h4>
+              <span>Remote Volunteer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="reveal">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            Do I need prior experience with animals?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>No prior experience is required for most roles. We provide comprehensive training. However, for medical assistance roles, relevant background is preferred.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            What is the minimum time commitment?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>We ask for a minimum of 4 hours per month for at least 3 months. This ensures continuity and allows you to build meaningful connections with the animals.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I volunteer if I'm under 18?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, volunteers aged 14-17 can participate with parental consent. Some roles may have age restrictions for safety reasons.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Is there a dress code?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Wear comfortable, closed-toe shoes and clothes you don't mind getting dirty. We provide volunteer t-shirts and aprons for shelter activities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
+          <p>We are a non-profit organization dedicated to rescuing, rehabilitating, and rehoming street dogs across India.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Emergency Contacts</h3>
+          <a href="tel:+1234567890"><i class="fas fa-phone"></i> Animal Rescue: +1 234 567 890</a>
+          <a href="tel:+0987654321"><i class="fas fa-ambulance"></i> Emergency Vet: +1 098 765 4321</a>
+          <a href="tel:911"><i class="fas fa-exclamation-triangle"></i> Emergency: 911</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="newadopt.html"><i class="fas fa-dog"></i> Adopt</a>
+          <a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a>
+          <a href="newvolunteer.html"><i class="fas fa-users"></i> Volunteer</a>
+          <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Get Involved</h3>
+          <a href="newsponsor.html"><i class="fas fa-star"></i> Sponsor a Dog</a>
+          <a href="events.html"><i class="fas fa-calendar"></i> Events</a>
+          <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+        </div>
+      </div>
+
+      <div class="back-to-top">
+        <button onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> Back to Top</button>
+      </div>
+
+      <div class="footer-bottom">
+        <p>2025 Adopt Me - Animal Rescue & Pet Adoption. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification -->
+  <div class="notification" id="notification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Success</div>
+      <div class="notification-message">Operation completed successfully</div>
+    </div>
+    <button class="notification-close" id="notificationClose">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <script>
+    // DOM Elements
+    const themeToggle = document.getElementById('theme-toggle');
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const volunteerForm = document.getElementById('volunteerForm');
+    const notification = document.getElementById('notification');
+    const notificationClose = document.getElementById('notificationClose');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollReveal();
+      animateStats();
+      initFAQ();
+    });
+
+    // Theme Toggle
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const icon = themeToggle.querySelector('i');
+      if (document.body.classList.contains('dark')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    });
+
+    // Mobile Menu
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+    });
+
+    menuOverlay.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+    });
+
+    // Opportunity Selection
+    function selectOpportunity(name) {
+      // Scroll to form
+      volunteerForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Pre-fill interest
+      const checkboxes = document.querySelectorAll('input[name="interest"]');
+      checkboxes.forEach(cb => {
+        const valueMap = {
+          'Animal Care': 'animal-care',
+          'Medical Assistance': 'medical',
+          'Outreach & Events': 'outreach',
+          'Remote Support': 'remote'
+        };
+        if (cb.value === valueMap[name]) {
+          cb.checked = true;
+        }
+      });
+      
+      showNotification('success', 'Area Selected', `${name} has been selected as your primary interest.`);
+    }
+
+    // Form Submission
+    volunteerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Validation
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      
+      if (!fullName || !email || !phone) {
+        showNotification('error', 'Missing Fields', 'Please fill in all required fields.');
+        return;
+      }
+      
+      showNotification('success', 'Application Submitted', 'Thank you! We will contact you within 48 hours.');
+      volunteerForm.reset();
+    });
+
+    // Notifications
+    function showNotification(type, title, message) {
+      notification.className = 'notification ' + type;
+      notification.querySelector('.notification-title').textContent = title;
+      notification.querySelector('.notification-message').textContent = message;
+      
+      const icon = notification.querySelector('.notification-icon i');
+      icon.className = 'fas ' + (type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle');
+      
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 4000);
+    }
+
+    notificationClose.addEventListener('click', () => {
+      notification.classList.remove('show');
+    });
+
+    // Scroll Reveal
+    function initScrollReveal() {
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      revealElements.forEach(el => observer.observe(el));
+    }
+
+    // Animate Stats
+    function animateStats() {
+      const stats = document.querySelectorAll('.stat-number');
+      
+      stats.forEach(stat => {
+        const target = parseInt(stat.dataset.target);
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const updateCount = () => {
+          current += step;
+          if (current < target) {
+            stat.textContent = Math.floor(current).toLocaleString('en-IN');
+            requestAnimationFrame(updateCount);
+          } else {
+            stat.textContent = target.toLocaleString('en-IN');
+          }
+        };
+        
+        setTimeout(updateCount, 500);
+      });
+    }
+
+    // FAQ Accordion
+    function initFAQ() {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          const isActive = question.classList.contains('active');
+          
+          // Close all
+          faqQuestions.forEach(q => {
+            q.classList.remove('active');
+            q.nextElementSibling.classList.remove('active');
+          });
+          
+          // Open clicked if it wasn't active
+          if (!isActive) {
+            question.classList.add('active');
+            answer.classList.add('active');
+          }
+        });
+      });
+    }
+
+    // Scroll to Top
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        navMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>

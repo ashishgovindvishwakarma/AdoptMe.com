@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sponsor a Dog - AdoptMe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* BRAND COLORS */
+      --primary-color: #f59e0b;
+      --secondary-color: #fef3c7;
+      --accent-color: #ea580c;
+      --accent-light: #fde68a;
+
+      /* TEXT */
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --text-color: #374151;
+
+      /* BACKGROUND */
+      --bg-light: #fffaf3;
+      --bg-white: #ffffff;
+      --card-background: #ffffff;
+
+      /* UI SUPPORT */
+      --success: #16a34a;
+      --danger: #dc2626;
+      --warning-color: #f59e0b;
+      --success-color: #16a34a;
+
+      /* SHADOWS */
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+
+      /* BORDERS */
+      --border-color: #e5e7eb;
+      --border-radius: 0.75rem;
+      --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+      --transition: all 0.3s ease;
+      --light-color: #f3f4f6;
+      --dark-color: #1f2937;
+    }
+
+    body.dark {
+      --primary-color: #fbbf24;
+      --secondary-color: #3b2f1d;
+      --accent-color: #fb923c;
+      --accent-light: #fde68a;
+
+      --text-dark: #f9fafb;
+      --text-light: #d1d5db;
+      --text-color: #e5e7eb;
+
+      --bg-light: #1a140b;
+      --bg-white: #2a2116;
+      --card-background: #2d251a;
+
+      --border-color: #4a4235;
+
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.7);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background: var(--bg-light);
+      transition: background-color 0.4s ease, color 0.4s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--bg-white);
+      color: var(--text-dark);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+
+    .dark header {
+      background: linear-gradient(135deg, #3e3426, #2c2416);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      color: var(--primary-color);
+      text-shadow: 0 2px 4px rgba(220, 189, 33, 0.3);
+      transition: var(--transition);
+    }
+
+    .logo:hover { transform: scale(1.05); }
+    .logo i { margin-right: 10px; font-size: 2rem; }
+
+    /* NAVIGATION */
+    nav.nav-menu ul {
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+
+    nav.nav-menu ul li {
+      margin-left: 25px;
+      position: relative;
+    }
+
+    nav.nav-menu ul li a {
+      color: var(--accent-color);
+      padding: 10px 15px;
+      border-radius: 30px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav.nav-menu ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 0; height: 100%;
+      background: rgba(151, 138, 4, 0.15);
+      transition: width 0.3s ease;
+      z-index: -1;
+      border-radius: 30px;
+    }
+    nav.nav-menu ul li a:hover::before { width: 100%; }
+    nav.nav-menu ul li a i { margin-right: 8px; font-size: 1.1rem; }
+    nav.nav-menu ul li a:hover { transform: translateY(-2px); }
+
+    /* Theme Toggle & Hamburger */
+    .theme-toggle {
+      background: rgba(242, 146, 43, 0.2);
+      border: 1px solid rgba(247, 182, 50, 0.3);
+      color: var(--primary-color);
+      border-radius: 50%;
+      width: 42px; height: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: var(--transition);
+    }
+    .theme-toggle:hover {
+      transform: rotate(15deg) scale(1.1);
+      background: rgba(247, 171, 31, 0.3);
+      box-shadow: 0 0 15px rgba(234, 147, 18, 0.3);
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      cursor: pointer;
+      margin-left: 15px;
+    }
+
+    @media (max-width: 768px) {
+      nav.nav-menu {
+        position: fixed;
+        top: 0; left: -100%;
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(145deg, var(--primary-color), var(--accent-color));
+        padding: 70px 25px 20px;
+        box-shadow: 3px 0 15px rgba(0, 0, 0, 0.2);
+        transition: left 0.4s ease;
+        overflow-y: auto;
+        display: block;
+        z-index: 1001;
+      }
+      nav.nav-menu.active { left: 0; }
+      nav.nav-menu ul { flex-direction: column; gap: 12px; padding: 0; }
+      nav.nav-menu ul li { width: 100%; margin-left: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+      nav.nav-menu ul li a {
+        display: block; width: 100%;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 12px 18px;
+        border-radius: 10px;
+        color: #fff;
+      }
+      .hamburger { display: block; }
+      .dark nav.nav-menu { background: linear-gradient(145deg, #3e3426, #2c2416); }
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 998;
+    }
+    .menu-overlay.active { display: block; }
+
+    /* HERO SECTION */
+    .sponsor-header {
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sponsor-header::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(234, 88, 12, 0.06) 0%, transparent 50%);
+      animation: floatBg 20s ease-in-out infinite;
+    }
+
+    @keyframes floatBg {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(20px, -20px) rotate(1deg); }
+      66% { transform: translate(-20px, 20px) rotate(-1deg); }
+    }
+
+    .sponsor-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .sponsor-header h1 span {
+      color: var(--primary-color);
+      position: relative;
+    }
+
+    .sponsor-header h1 span::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+      transform: scaleX(0);
+      animation: expandLine 0.6s ease forwards 0.8s;
+    }
+
+    @keyframes expandLine { to { transform: scaleX(1); } }
+
+    .sponsor-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-light);
+      font-size: 1.15rem;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards 0.2s;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards 0.4s;
+    }
+
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: block;
+    }
+    .stat-label { font-size: 0.9rem; color: var(--text-light); }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--card-background);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    section h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+
+    /* How it Works */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .step-item {
+      position: relative;
+    }
+
+    .step-number {
+      width: 50px; height: 50px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin: 0 auto 1rem;
+    }
+
+    .step-item h3 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+    .step-item p { color: var(--text-light); font-size: 0.95rem; }
+
+    /* Sponsorship Tiers */
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tier-card {
+      background: var(--bg-light);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tier-card:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .tier-card.popular {
+      border-color: var(--primary-color);
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 15px; right: -35px;
+      background: var(--accent-color);
+      color: white;
+      padding: 0.25rem 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transform: rotate(45deg);
+    }
+
+    .tier-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .tier-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+    .tier-price span { font-size: 1rem; color: var(--text-light); font-weight: 400; }
+
+    .tier-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .tier-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    .tier-features li {
+      padding: 0.5rem 0;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tier-features li i {
+      color: var(--success-color);
+    }
+
+    .tier-btn {
+      display: block;
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid var(--primary-color);
+      background: transparent;
+      color: var(--primary-color);
+    }
+
+    .tier-card.popular .tier-btn,
+    .tier-btn:hover {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+      border-color: transparent;
+    }
+
+    /* Dogs for Sponsorship */
+    .sponsor-dogs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .sponsor-dog-card {
+      background: var(--bg-white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .sponsor-dog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .dog-image-wrapper {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dog-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .sponsor-dog-card:hover .dog-image-wrapper img {
+      transform: scale(1.1);
+    }
+
+    .dog-urgent-badge {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: var(--danger);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .sponsor-dog-content { padding: 1.5rem; }
+
+    .sponsor-dog-content h3 {
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+      font-size: 1.3rem;
+    }
+
+    .dog-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .dog-story {
+      font-size: 0.9rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      --webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .sponsor-progress {
+      margin-bottom: 1rem;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: var(--border-color);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 4px;
+    }
+
+    .sponsor-btn {
+      display: block;
+      width: 100%;
+      padding: 0.65rem;
+      background: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sponsor-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .benefit-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .benefit-icon {
+      width: 50px; height: 50px;
+      background: var(--bg-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--primary-color);
+      flex-shrink: 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .benefit-text h3 {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+    .benefit-text p { font-size: 0.9rem; color: var(--text-light); }
+
+    /* Form Section */
+    .form-section {
+      background: var(--bg-light);
+      padding: 3rem 0;
+    }
+    .form-section section { background: var(--card-background); }
+
+    .sponsor-form {
+      max-width: 700px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .form-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-top: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group { margin-bottom: 0; }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      font-family: inherit;
+      font-size: 1rem;
+      background: var(--bg-white);
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      padding: 0.75rem 1.25rem;
+      border: 2px solid var(--border-color);
+      border-radius: 50px;
+      transition: var(--transition);
+    }
+
+    .radio-item input { display: none; }
+    
+    .radio-item.active {
+      border-color: var(--primary-color);
+      background: var(--secondary-color);
+      color: var(--accent-color);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-light);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      font-size: 4rem;
+      font-family: serif;
+      color: var(--primary-color);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    .testimonial-content {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .author-info h4 {
+      color: var(--text-dark);
+      margin-bottom: 0;
+    }
+    .author-info span {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* FAQ */
+    .faq-list { max-width: 800px; margin: 0 auto; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    .faq-question i {
+      transition: transform 0.3s ease;
+      color: var(--primary-color);
+    }
+
+    .faq-question.active i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: var(--text-light);
+    }
+
+    .faq-answer p { padding-top: 1rem; }
+    .faq-answer.active { max-height: 200px; }
+
+    /* FOOTER */
+    .footer {
+      background-color: var(--text-dark);
+      color: var(--secondary-color);
+      padding: 60px 0 20px;
+      margin-top: auto;
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    }
+
+    .dark .footer {
+      background-color: #1a1612;
+      color: var(--accent-light);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--bg-white);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 40px; height: 3px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: var(--secondary-color);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      transition: var(--transition);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-section a:hover {
+      color: var(--accent-light);
+      transform: translateX(5px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      text-align: center;
+      color: var(--secondary-color);
+      font-size: 0.9rem;
+    }
+
+    .back-to-top {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .back-to-top button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-to-top button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px; right: 20px;
+      background-color: var(--bg-white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transform: translateX(400px);
+      transition: transform 0.4s ease;
+      z-index: 3000;
+      max-width: 380px;
+      border-left: 4px solid var(--success-color);
+    }
+
+    .notification.show { transform: translateX(0); }
+    .notification.error { border-left-color: var(--danger); }
+    
+    .notification-icon { font-size: 1.5rem; }
+    .notification.success .notification-icon { color: var(--success-color); }
+    .notification.error .notification-icon { color: var(--danger); }
+    
+    .notification-content { flex: 1; }
+    .notification-title { font-weight: 600; margin-bottom: 0.25rem; color: var(--text-dark); }
+    .notification-message { font-size: 0.875rem; color: var(--text-light); }
+    
+    .notification-close {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stats-banner { gap: 1.5rem; }
+      .stat-number { font-size: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .radio-group { flex-direction: column; }
+      .footer-content { text-align: center; }
+      .footer-section { align-items: center; }
+      .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .sponsor-header h1 { font-size: 2rem; }
+      section { padding: 1.5rem; margin: 1rem; }
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
+      <nav class="nav-menu"> 
+        <ul>
+          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="newadopt.html"><i class="fas fa-dog"></i> Adopt</a></li>
+          <li><a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a></li>
+          <li><a href="newvolunteer.html"><i class="fas fa-users"></i> Volunteer</a></li>
+          <li><a href="newsponsor.html"><i class="fas fa-handshake"></i> Sponsor</a></li>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+          <li><a href="register.html"><i class="fas fa-user-plus"></i> Register</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger"><i class="fas fa-bars"></i></div> 
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="sponsor-header">
+    <h1>Be a <span>Guardian</span> Angel</h1>
+    <p>Can't adopt? You can still save a life. Sponsor a rescued dog's food, medical care, and shelter, and receive regular updates on their journey.</p>
+    
+    <div class="stats-banner">
+      <div class="stat-item">
+        <span class="stat-number" data-target="180">0</span>
+        <span class="stat-label">Dogs Sponsored</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="420">0</span>
+        <span class="stat-label">Active Sponsors</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="95">0</span>
+        <span class="stat-label">Success Rate %</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-overlay"></div>
+
+  <main>
+    <!-- How it Works -->
+    <section class="reveal">
+      <h2>How Sponsorship Works</h2>
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <h3>Choose a Dog</h3>
+          <p>Browse through dogs in need of sponsorship, read their stories, and pick one to support.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <h3>Select a Plan</h3>
+          <p>Choose a sponsorship tier that fits your budget – covering food, medical, or full care.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <h3>Stay Connected</h3>
+          <p>Receive monthly photo updates, health reports, and videos of your sponsored friend.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <h3>Visit Them</h3>
+          <p>Schedule visits to meet your sponsored dog at our shelter and see the impact firsthand.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sponsorship Tiers -->
+    <section class="reveal">
+      <h2>Sponsorship Plans</h2>
+      <div class="tiers-grid">
+        <div class="tier-card" data-tier="basic">
+          <div class="tier-icon"><i class="fas fa-bone"></i></div>
+          <div class="tier-title">Basic Care</div>
+          <div class="tier-price">Rs. 500 <span>/ month</span></div>
+          <ul class="tier-features">
+            <li><i class="fas fa-check"></i> Daily meals for 1 dog</li>
+            <li><i class="fas fa-check"></i> Basic nutrition supplements</li>
+            <li><i class="fas fa-check"></i> Quarterly photo updates</li>
+            <li><i class="fas fa-check"></i> Digital certificate</li>
+          </ul>
+          <button class="tier-btn" onclick="selectTier('Basic Care', 500)">Select Plan</button>
+        </div>
+
+        <div class="tier-card popular" data-tier="medical">
+          <div class="tier-badge">POPULAR</div>
+          <div class="tier-icon"><i class="fas fa-medkit"></i></div>
+          <div class="tier-title">Medical Care</div>
+          <div class="tier-price">Rs. 1,000 <span>/ month</span></div>
+          <ul class="tier-features">
+            <li><i class="fas fa-check"></i> All Basic Care benefits</li>
+            <li><i class="fas fa-check"></i> Monthly health check-ups</li>
+            <li><i class="fas fa-check"></i> Vaccinations & deworming</li>
+            <li><i class="fas fa-check"></i> Monthly video updates</li>
+          </ul>
+          <button class="tier-btn" onclick="selectTier('Medical Care', 1000)">Select Plan</button>
+        </div>
+
+        <div class="tier-card" data-tier="full">
+          <div class="tier-icon"><i class="fas fa-heart"></i></div>
+          <div class="tier-title">Full Sponsorship</div>
+          <div class="tier-price">Rs. 2,500 <span>/ month</span></div>
+          <ul class="tier-features">
+            <li><i class="fas fa-check"></i> All Medical Care benefits</li>
+            <li><i class="fas fa-check"></i> Emergency medical fund</li>
+            <li><i class="fas fa-check"></i> Grooming & shelter costs</li>
+            <li><i class="fas fa-check"></i> Priority visitation rights</li>
+            <li><i class="fas fa-check"></i> Named plaque on kennel</li>
+          </ul>
+          <button class="tier-btn" onclick="selectTier('Full Sponsorship', 2500)">Select Plan</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dogs for Sponsorship -->
+    <section class="reveal">
+      <h2>Dogs Needing Sponsors</h2>
+      <div class="sponsor-dogs-grid" id="dogsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="reveal">
+      <h2>Sponsor Benefits</h2>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-camera"></i></div>
+          <div class="benefit-text">
+            <h3>Regular Updates</h3>
+            <p>Receive monthly photos and videos of your sponsored dog.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-certificate"></i></div>
+          <div class="benefit-text">
+            <h3>Certificate</h3>
+            <p>Get a digital sponsorship certificate and annual report.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="benefit-text">
+            <h3>Visit Rights</h3>
+            <p>Schedule visits to meet your sponsored dog at our shelter.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-receipt"></i></div>
+          <div class="benefit-text">
+            <h3>Tax Benefit</h3>
+            <p>All contributions are eligible for tax exemption under 80G.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Application Form -->
+    <div class="form-section">
+      <section class="reveal">
+        <h2>Become a Sponsor</h2>
+        <form id="sponsorForm" class="sponsor-form">
+          <div>
+            <h3 class="form-section-title">Sponsorship Details</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Selected Plan</label>
+                <input type="text" id="selectedPlanDisplay" readonly placeholder="Choose a plan above">
+              </div>
+              <div class="form-group">
+                <label>Selected Dog (Optional)</label>
+                <input type="text" id="selectedDogDisplay" readonly placeholder="Choose a dog above or leave blank">
+              </div>
+            </div>
+            <input type="hidden" id="selectedPlanPrice" value="0">
+            
+            <div class="form-group">
+              <label>Duration</label>
+              <div class="radio-group">
+                <label class="radio-item active"><input type="radio" name="duration" value="monthly" checked> Monthly</label>
+                <label class="radio-item"><input type="radio" name="duration" value="quarterly"> Quarterly</label>
+                <label class="radio-item"><input type="radio" name="duration" value="yearly"> Yearly</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="form-section-title">Your Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sponsorName">Full Name *</label>
+                <input type="text" id="sponsorName" placeholder="Your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="sponsorEmail">Email Address *</label>
+                <input type="email" id="sponsorEmail" placeholder="your.email@example.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sponsorPhone">Phone Number *</label>
+                <input type="tel" id="sponsorPhone" placeholder="+91 XXXXX XXXXX" required>
+              </div>
+              <div class="form-group">
+                <label for="sponsorPAN">PAN Number (for 80G)</label>
+                <input type="text" id="sponsorPAN" placeholder="ABCDE1234F">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sponsorMessage">Message for the Dog (Optional)</label>
+              <textarea id="sponsorMessage" rows="3" placeholder="A loving message for your sponsored friend..."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-heart"></i> Start Sponsorship
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="reveal">
+      <h2>What Sponsors Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "I've been sponsoring Bruno for a year now. Getting his monthly updates is the highlight of my month. It feels great knowing I'm part of his recovery journey."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">SK</div>
+            <div class="author-info">
+              <h4>Sanjay Kumar</h4>
+              <span>Sponsoring since 2023</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "As someone who can't keep pets at home, sponsorship is the perfect way to stay connected to animals. The team at AdoptMe sends such detailed updates."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">AP</div>
+            <div class="author-info">
+              <h4>Anita Patel</h4>
+              <span>Medical Tier Sponsor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="reveal">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I visit my sponsored dog?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Sponsors can schedule visits on weekends. Full sponsors get priority scheduling. Please contact us 48 hours in advance.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            What happens if my sponsored dog gets adopted?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Congratulations! You can transfer your sponsorship to another dog in need. We will notify you immediately if your sponsored dog finds a forever home.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I cancel my sponsorship?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, you can cancel anytime with 30 days notice. We appreciate your support for however long you can provide it.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            How are the funds used?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>100% of sponsorship funds go directly to the dog's care. We provide a breakdown of expenses in your quarterly reports.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
+          <p>We are a non-profit organization dedicated to rescuing, rehabilitating, and rehoming street dogs across India.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Emergency Contacts</h3>
+          <a href="tel:+1234567890"><i class="fas fa-phone"></i> Animal Rescue: +1 234 567 890</a>
+          <a href="tel:+0987654321"><i class="fas fa-ambulance"></i> Emergency Vet: +1 098 765 4321</a>
+          <a href="tel:911"><i class="fas fa-exclamation-triangle"></i> Emergency: 911</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="newadopt.html"><i class="fas fa-dog"></i> Adopt</a>
+          <a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a>
+          <a href="newvolunteer.html"><i class="fas fa-users"></i> Volunteer</a>
+          <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Get Involved</h3>
+          <a href="newsponsor.html"><i class="fas fa-star"></i> Sponsor a Dog</a>
+          <a href="events.html"><i class="fas fa-calendar"></i> Events</a>
+          <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+        </div>
+      </div>
+
+      <div class="back-to-top">
+        <button onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> Back to Top</button>
+      </div>
+
+      <div class="footer-bottom">
+        <p>2025 Adopt Me - Animal Rescue & Pet Adoption. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification -->
+  <div class="notification" id="notification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Success</div>
+      <div class="notification-message">Operation completed successfully</div>
+    </div>
+    <button class="notification-close" id="notificationClose">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <script>
+    // Mock Data
+    const dogsData = [
+      { id: 1, name: "Bruno", breed: "Labrador Mix", age: "5 Years", image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop", story: "Bruno was rescued with a broken leg. He needs ongoing medication.", need: "Medical", progress: 60 },
+      { id: 2, name: "Luna", breed: "Indie", age: "3 Years", image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop", story: "Luna is blind in one eye and needs special care and shelter.", need: "Shelter", progress: 30 },
+      { id: 3, name: "Rocky", breed: "German Shepherd", age: "7 Years", age: "7 Years", image: "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=400&h=400&fit=crop", story: "Senior dog Rocky was abandoned. He needs a special diet.", need: "Food", progress: 80 },
+      { id: 4, name: "Daisy", breed: "Beagle Mix", age: "2 Years", image: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop", story: "Daisy is recovering from skin issues and needs regular treatment.", need: "Medical", progress: 45 }
+    ];
+
+    // DOM Elements
+    const themeToggle = document.getElementById('theme-toggle');
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const sponsorForm = document.getElementById('sponsorForm');
+    const notification = document.getElementById('notification');
+    const notificationClose = document.getElementById('notificationClose');
+    const dogsGrid = document.getElementById('dogsGrid');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollReveal();
+      animateStats();
+      initFAQ();
+      renderDogs();
+      initRadioButtons();
+    });
+
+    // Theme Toggle
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const icon = themeToggle.querySelector('i');
+      if (document.body.classList.contains('dark')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    });
+
+    // Mobile Menu
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+    });
+
+    menuOverlay.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+    });
+
+    // Render Dogs
+    function renderDogs() {
+      dogsGrid.innerHTML = '';
+      dogsData.forEach(dog => {
+        const card = document.createElement('div');
+        card.className = 'sponsor-dog-card';
+        card.innerHTML = `
+          <div class="dog-image-wrapper">
+            <img src="${dog.image}" alt="${dog.name}" loading="lazy">
+            ${dog.need === 'Medical' ? '<span class="dog-urgent-badge">Urgent Need</span>' : ''}
+          </div>
+          <div class="sponsor-dog-content">
+            <h3>${dog.name}</h3>
+            <div class="dog-meta">
+              <span><i class="fas fa-paw"></i> ${dog.breed}</span>
+              <span><i class="fas fa-birthday-cake"></i> ${dog.age}</span>
+            </div>
+            <p class="dog-story">${dog.story}</p>
+            <div class="sponsor-progress">
+              <div class="progress-label">
+                <span>Needs Covered</span>
+                <span>${dog.progress}%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" style="width: ${dog.progress}%"></div>
+              </div>
+            </div>
+            <button class="sponsor-btn" onclick="selectDog('${dog.name}')">
+              Sponsor ${dog.name}
+            </button>
+          </div>
+        `;
+        dogsGrid.appendChild(card);
+      });
+    }
+
+    // Selection Logic
+    function selectTier(tierName, price) {
+      document.getElementById('selectedPlanDisplay').value = `${tierName} - Rs. ${price}/mo`;
+      document.getElementById('selectedPlanPrice').value = price;
+      
+      // Visual feedback on cards
+      document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('popular'));
+      event.target.closest('.tier-card').classList.add('popular');
+      
+      showNotification('success', 'Plan Selected', `You selected the ${tierName} plan.`);
+      sponsorForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function selectDog(dogName) {
+      document.getElementById('selectedDogDisplay').value = dogName;
+      showNotification('success', 'Dog Selected', `You selected to sponsor ${dogName}.`);
+      sponsorForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Radio Buttons Logic
+    function initRadioButtons() {
+      const radioItems = document.querySelectorAll('.radio-item');
+      radioItems.forEach(item => {
+        item.addEventListener('click', () => {
+          radioItems.forEach(r => r.classList.remove('active'));
+          item.classList.add('active');
+          item.querySelector('input').checked = true;
+        });
+      });
+    }
+
+    // Form Submission
+    sponsorForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('sponsorName').value;
+      const email = document.getElementById('sponsorEmail').value;
+      const plan = document.getElementById('selectedPlanDisplay').value;
+
+      if (!name || !email) {
+        showNotification('error', 'Missing Info', 'Please fill in all required fields.');
+        return;
+      }
+      if (!plan) {
+        showNotification('error', 'No Plan Selected', 'Please select a sponsorship plan above.');
+        return;
+      }
+
+      showNotification('success', 'Thank You!', 'Your sponsorship request has been submitted.');
+      sponsorForm.reset();
+      document.getElementById('selectedPlanDisplay').value = '';
+      document.getElementById('selectedDogDisplay').value = '';
+    });
+
+    // Notifications
+    function showNotification(type, title, message) {
+      notification.className = 'notification ' + type;
+      notification.querySelector('.notification-title').textContent = title;
+      notification.querySelector('.notification-message').textContent = message;
+      
+      const icon = notification.querySelector('.notification-icon i');
+      icon.className = 'fas ' + (type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle');
+      
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 4000);
+    }
+
+    notificationClose.addEventListener('click', () => {
+      notification.classList.remove('show');
+    });
+
+    // Scroll Reveal
+    function initScrollReveal() {
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      revealElements.forEach(el => observer.observe(el));
+    }
+
+    // Animate Stats
+    function animateStats() {
+      const stats = document.querySelectorAll('.stat-number');
+      
+      stats.forEach(stat => {
+        const target = parseInt(stat.dataset.target);
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const updateCount = () => {
+          current += step;
+          if (current < target) {
+            stat.textContent = Math.floor(current).toLocaleString('en-IN');
+            requestAnimationFrame(updateCount);
+          } else {
+            stat.textContent = target.toLocaleString('en-IN');
+          }
+        };
+        
+        setTimeout(updateCount, 500);
+      });
+    }
+
+    // FAQ Accordion
+    function initFAQ() {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          const isActive = question.classList.contains('active');
+          
+          // Close all
+          faqQuestions.forEach(q => {
+            q.classList.remove('active');
+            q.nextElementSibling.classList.remove('active');
+          });
+          
+          // Open clicked if it wasn't active
+          if (!isActive) {
+            question.classList.add('active');
+            answer.classList.add('active');
+          }
+        });
+      });
+    }
+
+    // Scroll to Top
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });   
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        navMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate - AdoptMe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="newdonate.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
+      <nav class="nav-menu"> 
+        <ul>
+          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="newadopt.html"><i class="fas fa-dog"></i> Adopt</a></li>
+          <li><a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a></li>
+          <li><a href="newvolunteer.html"><i class="fas fa-users"></i> Volunteer</a></li>
+          <li><a href="newsponsor.html"><i class="fas fa-handshake"></i> Sponsor</a></li>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+          <li><a href="register.html"><i class="fas fa-user-plus"></i> Register</a></li>
+        </ul>
+      </nav>
+
+      <div class="hamburger"><i class="fas fa-bars"></i></div> 
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="donate-header">
+    <h1>Make a <span>Difference</span> Today</h1>
+    <p>Your generosity helps us rescue, rehabilitate, and care for street dogs across India. Every contribution saves lives.</p>
+    
+    <div class="stats-banner">
+      <div class="stat-item">
+        <span class="stat-number" data-target="2847">0</span>
+        <span class="stat-label">Dogs Rescued</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="1523">0</span>
+        <span class="stat-label">Dogs Adopted</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="45">0</span>
+        <span class="stat-label">Active Shelters</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-overlay"></div>
+
+  <!-- Progress Section -->
+  <section class="progress-section reveal">
+    <h2>Monthly Fundraising Goal</h2>
+    <div class="progress-container">
+      <div class="progress-goal">
+        <span>Amount Raised</span>
+        <span>Goal</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" data-width="68"></div>
+      </div>
+      <div class="progress-info">
+        <span><strong>Rs. 3,40,000</strong> raised of Rs. 5,00,000</span>
+        <span class="progress-donors">
+          <i class="fas fa-users"></i> 847 donors this month
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section class="impact-section reveal">
+    <h2>Your Impact</h2>
+    <div class="impact-cards">
+      <div class="impact-card" data-amount="500">
+        <div class="impact-icon"><i class="fas fa-bone"></i></div>
+        <h3>Rs. 500</h3>
+        <p>Feeds 5 dogs for a week with nutritious meals</p>
+      </div>
+      <div class="impact-card" data-amount="1000">
+        <div class="impact-icon"><i class="fas fa-medkit"></i></div>
+        <h3>Rs. 1,000</h3>
+        <p>Provides medical care for an injured street dog</p>
+      </div>
+      <div class="impact-card" data-amount="2500">
+        <div class="impact-icon"><i class="fas fa-home"></i></div>
+        <h3>Rs. 2,500</h3>
+        <p>Shelters 3 dogs for a month with food and care</p>
+      </div>
+      <div class="impact-card" data-amount="5000">
+        <div class="impact-icon"><i class="fas fa-ambulance"></i></div>
+        <h3>Rs. 5,000</h3>
+        <p>Funds a complete rescue operation with treatment</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donation Form -->
+  <div class="donate-form-section">
+    <section class="reveal">
+      <h2>Complete Your Donation</h2>
+      <form id="donationForm" class="donate-form">
+        
+        <h3 class="form-section-title">Select Amount</h3>
+        <div class="amount-options">
+          <div class="amount-option" data-amount="500">Rs. 500</div>
+          <div class="amount-option active" data-amount="1000">Rs. 1,000</div>
+          <div class="amount-option" data-amount="2500">Rs. 2,500</div>
+          <div class="amount-option" data-amount="5000">Rs. 5,000</div>
+          <div class="amount-option" data-amount="10000">Rs. 10,000</div>
+          <div class="amount-option" data-amount="25000">Rs. 25,000</div>
+        </div>
+
+        <div class="custom-amount-wrapper">
+          <label>Or enter a custom amount</label>
+          <div class="input-group">
+            <span class="currency">Rs.</span>
+            <input type="number" id="customAmount" placeholder="Enter custom amount" min="100">
+          </div>
+        </div>
+
+        <h3 class="form-section-title">Donation Type</h3>
+        <div class="donation-type">
+          <div class="donation-type-option active" data-type="one-time">
+            <i class="fas fa-heart"></i>
+            <span>One-time Donation</span>
+            <small>Make a single contribution</small>
+          </div>
+          <div class="donation-type-option" data-type="monthly">
+            <i class="fas fa-sync-alt"></i>
+            <span>Monthly Recurring</span>
+            <small>Sustain our mission all year</small>
+          </div>
+        </div>
+
+        <h3 class="form-section-title">Payment Method</h3>
+        <div class="payment-methods">
+          <div class="payment-method upi active" data-method="upi">
+            <i class="fas fa-mobile-alt"></i>
+            <span>UPI / GPay</span>
+          </div>
+          <div class="payment-method card" data-method="card">
+            <i class="fas fa-credit-card"></i>
+            <span>Credit/Debit Card</span>
+          </div>
+          <div class="payment-method netbanking" data-method="netbanking">
+            <i class="fas fa-university"></i>
+            <span>Net Banking</span>
+          </div>
+          <div class="payment-method wallet" data-method="wallet">
+            <i class="fas fa-wallet"></i>
+            <span>Wallets</span>
+          </div>
+        </div>
+
+        <h3 class="form-section-title">Gift Options</h3>
+        <div class="gift-options">
+          <div class="gift-card selected" data-gift="general">
+            <div class="gift-icon"><i class="fas fa-paw"></i></div>
+            <h3>General Fund</h3>
+            <p>Support overall rescue operations and daily care</p>
+          </div>
+          <div class="gift-card" data-gift="medical">
+            <div class="gift-icon"><i class="fas fa-stethoscope"></i></div>
+            <h3>Medical Care</h3>
+            <p>Fund surgeries, treatments, and vaccinations</p>
+          </div>
+          <div class="gift-card" data-gift="memorial">
+            <div class="gift-icon"><i class="fas fa-dove"></i></div>
+            <h3>In Memory</h3>
+            <p>Donate in honor of a loved one or pet</p>
+          </div>
+        </div>
+
+        <h3 class="form-section-title">Donor Information</h3>
+        <div class="toggle-wrapper">
+          <label class="toggle-switch">
+            <input type="checkbox" id="anonymous">
+            <span class="toggle-slider"></span>
+          </label>
+          <div class="toggle-label">
+            Donate anonymously
+            <small>Your name will not be displayed publicly</small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="donorName">Full Name</label>
+            <input type="text" id="donorName" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="donorEmail">Email Address</label>
+            <input type="email" id="donorEmail" placeholder="your.email@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="donorPhone">Phone Number</label>
+            <input type="tel" id="donorPhone" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+          <div class="form-group">
+            <label for="donorPAN">PAN Number (for tax benefit)</label>
+            <input type="text" id="donorPAN" placeholder="ABCDE1234F" maxlength="10">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="donorMessage">Message (Optional)</label>
+          <textarea id="donorMessage" rows="3" placeholder="Share why you're donating or leave a special message..."></textarea>
+        </div>
+
+        <h3 class="form-section-title">Donation Summary</h3>
+        <div class="donation-summary">
+          <div class="summary-row">
+            <span>Donation Amount</span>
+            <span id="summaryAmount">Rs. 1,000</span>
+          </div>
+          <div class="summary-row">
+            <span>Donation Type</span>
+            <span id="summaryType">One-time</span>
+          </div>
+          <div class="summary-row">
+            <span>Payment Method</span>
+            <span id="summaryPayment">UPI / GPay</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax Benefit (80G)</span>
+            <span id="summaryTax">Rs. 500</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span id="summaryTotal">Rs. 1,000</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-heart"></i> Complete Donation
+        </button>
+
+        <div class="trust-indicators">
+          <div class="trust-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>100% Secure Payment</span>
+          </div>
+          <div class="trust-item">
+            <i class="fas fa-file-invoice"></i>
+            <span>Tax Benefit under 80G</span>
+          </div>
+          <div class="trust-item">
+            <i class="fas fa-chart-pie"></i>
+            <span>Transparent Fund Usage</span>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Donation Breakdown -->
+  <section class="breakdown-section reveal">
+    <h2>How Your Donation is Used</h2>
+    <div class="breakdown-grid">
+      <div class="breakdown-item">
+        <div class="breakdown-chart" style="background: conic-gradient(var(--primary-color) 0% 40%, var(--bg-light) 40% 100%);" data-percent="40%"></div>
+        <h4>Medical Care</h4>
+        <p>Surgeries, treatments, vaccinations</p>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-chart" style="background: conic-gradient(var(--accent-color) 0% 30%, var(--bg-light) 30% 100%);" data-percent="30%"></div>
+        <h4>Food & Nutrition</h4>
+        <p>Daily meals, supplements, treats</p>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-chart" style="background: conic-gradient(var(--success-color) 0% 20%, var(--bg-light) 20% 100%);" data-percent="20%"></div>
+        <h4>Shelter & Care</h4>
+        <p>Housing, bedding, utilities</p>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-chart" style="background: conic-gradient(#6366f1 0% 10%, var(--bg-light) 10% 100%);" data-percent="10%"></div>
+        <h4>Operations</h4>
+        <p>Staff, transport, admin</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Stories -->
+  <section class="stories-section reveal">
+    <h2>Stories Made Possible by Donors</h2>
+    <div class="stories-grid">
+      <div class="story-card">
+        <div class="story-image">
+          <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=300&fit=crop" alt="Rescued dog" loading="lazy">
+        </div>
+        <div class="story-content">
+          <span class="story-tag">Rescue Story</span>
+          <h3>Bruno's Second Chance</h3>
+          <p>Found with severe injuries, Bruno needed Rs. 45,000 in surgeries. Thanks to donors like you, he's now healthy and adopted.</p>
+          <div class="story-cost">
+            <span>Treatment Cost</span>
+            <span>Rs. 45,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-image">
+          <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=300&fit=crop" alt="Rescued dogs" loading="lazy">
+        </div>
+        <div class="story-content">
+          <span class="story-tag">Shelter Upgrade</span>
+          <h3>New Shelter Wing</h3>
+          <p>Monthly donors helped us build a new wing that houses 50 additional dogs with proper ventilation and comfort.</p>
+          <div class="story-cost">
+            <span>Project Cost</span>
+            <span>Rs. 3,50,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-image">
+          <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=300&fit=crop" alt="Happy dog" loading="lazy">
+        </div>
+        <div class="story-content">
+          <span class="story-tag">Medical Camp</span>
+          <h3>Street Dog Vaccination</h3>
+          <p>Last month, we vaccinated 500+ street dogs against rabies, protecting both animals and communities.</p>
+          <div class="story-cost">
+            <span>Cost per dog</span>
+            <span>Rs. 250</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Donors -->
+  <section class="recent-donors reveal">
+    <h2>Recent Supporters</h2>
+    <div class="donor-list" id="donorList">
+      <!-- Donors will be populated by JS -->
+    </div>
+  </section>
+
+  <!-- Corporate Partnership -->
+  <section class="corporate-section reveal">
+    <h2>Corporate Partnerships</h2>
+    <div class="corporate-grid">
+      <div class="corporate-item">
+        <i class="fas fa-building"></i>
+        <h3>CSR Partnerships</h3>
+        <p>Partner with us for your CSR initiatives. We offer complete transparency and impact reporting.</p>
+      </div>
+      <div class="corporate-item">
+        <i class="fas fa-handshake"></i>
+        <h3>Employee Giving</h3>
+        <p>Set up payroll giving programs and matching gift initiatives for your employees.</p>
+      </div>
+      <div class="corporate-item">
+        <i class="fas fa-calendar-check"></i>
+        <h3>Event Sponsorship</h3>
+        <p>Sponsor adoption drives, vaccination camps, or awareness events in your area.</p>
+      </div>
+      <div class="corporate-item">
+        <i class="fas fa-percentage"></i>
+        <h3>Tax Benefits</h3>
+        <p>All corporate donations are eligible for tax benefits under section 80G.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
+          <p>We are a non-profit organization dedicated to rescuing, rehabilitating, and rehoming street dogs across India.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Emergency Contacts</h3>
+          <a href="tel:+1234567890"><i class="fas fa-phone"></i> Animal Rescue: +1 234 567 890</a>
+          <a href="tel:+0987654321"><i class="fas fa-ambulance"></i> Emergency Vet: +1 098 765 4321</a>
+          <a href="tel:911"><i class="fas fa-exclamation-triangle"></i> Emergency: 911</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="newadopt.html"><i class="fas fa-dog"></i> Adopt</a>
+          <a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a>
+          <a href="newvolunteer.html"><i class="fas fa-users"></i> Volunteer</a>
+          <a href="newsponsor.html"><i class="fas fa-handshake"></i> Sponsor</a>
+          <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Get Involved</h3>
+          <a href="newvolunteer.html"><i class="fas fa-hands-helping"></i> Become a Volunteer</a>
+          <a href="newsponsor.html"><i class="fas fa-star"></i> Sponsor a Dog</a>
+          <a href="events.html"><i class="fas fa-calendar"></i> Events</a>
+          <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+        </div>
+      </div>
+
+      <div class="back-to-top">
+        <button onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> Back to Top</button>
+      </div>
+
+      <div class="footer-bottom">
+        <p>2025 Adopt Me - Animal Rescue & Pet Adoption. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="success-modal">
+    <div class="success-content">
+      <div class="success-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h2>Thank You for Your Generosity!</h2>
+      <p>Your donation will help us rescue and care for more street dogs in need.</p>
+      <div class="success-details">
+        <p><strong>Amount:</strong> <span id="modalAmount">Rs. 1,000</span></p>
+        <p><strong>Transaction ID:</strong> <span id="modalTransaction">TXN-2025011234</span></p>
+        <p><strong>Email:</strong> Receipt sent to your email</p>
+      </div>
+      <button class="btn btn-primary" onclick="closeSuccessModal()">
+        <i class="fas fa-check"></i> Done
+      </button>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div class="notification" id="notification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Success</div>
+      <div class="notification-message">Operation completed successfully</div>
+    </div>
+    <button class="notification-close" id="notificationClose">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <script src="newdonate.js"></script>
+</body>
+</html>
