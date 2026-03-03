@@ -147,7 +147,7 @@
       <div class="logo"><i class="fas fa-paw"></i> AdoptMe</div>
       <nav class="nav-menu"> 
         <ul>
-          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="newadopt.html"><i class="fas fa-dog"></i> Adopt</a></li>
           <li><a href="newdonate.html"><i class="fas fa-hand-holding-heart"></i> Donate</a></li>
           <li><a href="newvolunteer.html"><i class="fas fa-users"></i> Volunteer</a></li>
@@ -480,9 +480,10 @@
     function deleteAccount() {
         if(confirm('Are you sure you want to delete your account?')) {
             localStorage.removeItem(USER_KEY);
-            window.location.href = 'homepage.html';
+            window.location.href = 'index.html';
         }
     }
   </script>
 </body>
+
 </html>
